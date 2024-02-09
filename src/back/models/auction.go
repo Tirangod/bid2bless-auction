@@ -2,7 +2,7 @@ package models
 
 import "time"
 
-type Auctions struct {
+type Auction struct {
 	ID          int       `json:"id"`
 	Name        string    `json:"name"`
 	Photo       string    `json:"photo"`

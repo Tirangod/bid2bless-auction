@@ -2,7 +2,7 @@ package models
 
 import "time"
 
-type Messages struct {
+type Message struct {
 	ID        int       `json:"id"`
 	AuctionId int       `json:"auction_id"`
 	SentAt    time.Time `json:"sent_at"`

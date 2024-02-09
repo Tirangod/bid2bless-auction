@@ -1,4 +1,4 @@
-package db
+package models
 
 import "time"
 
@@ -13,11 +13,4 @@ type Auctions struct {
 	InitialBet  int       `json:"initial_bet"`
 	Bet         int       `json:"bet"`
 	UserId      int       `json:"user_id"`
-}
-type BetHistory struct {
-	ID         int       `json:"id"`
-	AuctionId  int       `json:"auction_id"`
-	UpdatedBet int       `json:"updated_bet"`
-	UpdatedAt  time.Time `json:"updated_at"`
-	UserId     int       `json:"user_id"`
 }

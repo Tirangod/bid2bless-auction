@@ -1,9 +1,5 @@
 package controllers
 
-import (
-	"github.com/gofiber/fiber/v2"
-)
-
 // User registration request only created when user tries to register
 type signupRequestData struct {
 	Username  string `json:"username"`
@@ -14,4 +10,3 @@ type signupRequestData struct {
 type loginRequestData struct {
 	LoginHash int64 `json:"login_hash"`
 }
-

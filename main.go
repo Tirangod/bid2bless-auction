@@ -4,8 +4,10 @@ import (
 	"bid2bless/src/back/routes"
 	"database/sql"
 	"fmt"
-	"github.com/gofiber/fiber/v2"
 	"log"
+
+	"github.com/gofiber/fiber/v2"
+	_ "github.com/mattn/go-sqlite3"
 )
 
 func main() {
@@ -17,7 +19,9 @@ func main() {
 
 	_ = db
 
-	app := fiber.New(fiber.Config{})
+	app := fiber.New(fiber.Config{
+		
+	})
 
 	routes.SetupRoutes(app)
 

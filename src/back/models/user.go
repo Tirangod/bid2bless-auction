@@ -1,10 +1,12 @@
 package models
 
 type User struct {
-	ID             int    `json:"id"`
-	Email          string `json:"email"`
-	Name           string `json:"name"`
-	HashedPassword string `json:"hashedPassword"`
-	Balance        int    `json:"balance"`
-	InuseBalance   int    `json:"inuse_balance"`
+	id             int
+	email          string
+	name           string
+	hashedPassword string
+	balance        int
+	inuseBalance   int
 }
+
+var _ User

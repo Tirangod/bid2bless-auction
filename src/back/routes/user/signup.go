@@ -8,9 +8,9 @@ import (
 
 func UserSignupRoute() *route.RouteData {
 	return &route.RouteData{
-		fiber.MethodPost,
-		"/",
-		func(c *fiber.Ctx) error {
+		Method: fiber.MethodPost,
+		Path:   "/",
+		Handler: func(c *fiber.Ctx) error {
 			return nil
 		},
 	}

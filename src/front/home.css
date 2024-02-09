@@ -1,0 +1,21 @@
+
+/* header section */
+
+.header {
+	margin: 0 auto;
+	background-color: #000;
+	height: 100px;
+}
+
+.logo {
+
+}
+
+.logo__image {
+
+}
+
+.nav__link {
+	color: #fff;
+	text-decoration: none;
+}

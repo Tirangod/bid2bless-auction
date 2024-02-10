@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "alpinejs": "^3.13.5"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}

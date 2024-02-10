@@ -23,7 +23,9 @@ CREATE TABLE `users` (
 
 CREATE TABLE `users_auctions` (
   `user_id` INTEGER NOT NULL,
-  `auction_id` INTEGER NOT NULL
+  `auction_id` INTEGER NOT NULL,
+  FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+  FOREIGN KEY (`auction_id`) REFERENCES `auctions` (`id`)
 );
 
 CREATE TABLE `bet_history` (
@@ -46,7 +48,6 @@ CREATE TABLE `messages` (
 );
 
 CREATE TABLE `categories` (
-  `id` INTEGER PRIMARY KEY AUTOINCREMENT,
   `name` VARCHAR(255) PRIMARY KEY
 );
 

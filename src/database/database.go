@@ -54,7 +54,7 @@ func New(config ...Config) *DB {
 
 func GetDB() *DB {
 	if db == nil {
-		dblogger.Panicln("db object in nil. Initilize db via database.New!")
+		dblogger.Panicln("db object is nil. Initilize db via database.New()!")
 	}
 	return db
 }

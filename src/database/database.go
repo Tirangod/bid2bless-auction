@@ -48,6 +48,10 @@ func New(config ...Config) *DB {
 		conn.config = envDBConfig()
 	}
 
+	if db != nil {
+		dblogger.Println("")
+	}
+
 	db = conn
 	return conn
 }

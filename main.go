@@ -13,6 +13,7 @@ import (
 
 var mainLogger *log.Logger = log.New(os.Stdout, "Main: ", log.LstdFlags|log.Lmsgprefix)
 
+// Swagger comments...
 func main() {
 	godotenv.Load()
 
@@ -30,7 +31,7 @@ func main() {
 		BasePath: "/",
 		FilePath: "./docs/openapi.json",
 		Path:     "openapi",
-		Title:    "Bid2bless API Docs",
+		Title:    "Bid2Bless API Docs",
 	})
 
 	routes.SetupRoutes(app)

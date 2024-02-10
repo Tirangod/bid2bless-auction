@@ -2,6 +2,7 @@ package main
 
 import (
 	"bid2bless/src/database"
+	"bid2bless/src/routes"
 	"bid2bless/src/server"
 	"log"
 	"os"
@@ -13,7 +14,6 @@ var mainLogger *log.Logger = log.New(os.Stdout, "Main: ", log.LstdFlags|log.Lmsg
 
 // Swagger comments...
 func main() {
-
 	godotenv.Load() // Load vars from .env file in root folder
 
 	db := database.New()
@@ -22,22 +22,11 @@ func main() {
 	}
 	defer db.Close()
 
-	server, err := server.NewServer(db)
+	// No err check because it checked inside server package
+	s := server.New()
 
-	if err != nil {
-		log.Fatal("cannot create server:", err)
-	}
+	routes.SetupRoutes(s.App)
 
-	err = server.Start(os.Getenv("PORT"))
-	if err != nil {
-		log.Fatal("cannot start server:", err)
-	}
-
-	// app.Use(swagger.Config{
-	// 	BasePath: "/",
-	// 	FilePath: "./docs/openapi.json",
-	// 	Path:     "openapi",
-	// 	Title:    "Bid2Bless API Docs",
-	// })
-
+	// No err check because it checked inside server package
+	s.Start(os.Getenv("PORT"))
 }

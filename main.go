@@ -1,44 +1,40 @@
 package main
 
 import (
+	"bid2bless/src/back/database"
 	"bid2bless/src/back/routes"
-	"database/sql"
-	"fmt"
 	"log"
+	"os"
 
+	"github.com/gofiber/contrib/swagger"
 	"github.com/gofiber/fiber/v2"
-	_ "github.com/mattn/go-sqlite3"
+	"github.com/joho/godotenv"
 )
 
+var mainLogger *log.Logger = log.New(os.Stdout, "Main: ", log.LstdFlags|log.Lmsgprefix)
+
 func main() {
+	godotenv.Load()
 
-	db, err := connectToDB()
-	if err != nil {
-		fmt.Println(err)
+	db := database.New()
+	if db.Connect() != nil {
+		mainLogger.Fatalln("DB connection failed! Exiting...")
 	}
-
-	_ = db
+	defer db.Close()
 
 	app := fiber.New(fiber.Config{
-		
+		// Server configuration
+	})
+
+	app.Use(swagger.Config{
+		BasePath: "/",
+		FilePath: "./docs/openapi.json",
+		Path:     "openapi",
+		Title:    "Bid2bless API Docs",
 	})
 
 	routes.SetupRoutes(app)
 
-	err = app.Listen(":3000")
-	log.Fatal(err)
-}
-
-func connectToDB() (*sql.DB, error) {
-	db, err := sql.Open("sqlite3", "./db/data/.db")
-	if err != nil {
-		return nil, err
-	}
-	err = db.Ping()
-	if err != nil {
-		return nil, err
-	}
-
-	fmt.Println("Connected to db")
-	return db, nil
+	err := app.Listen(os.Getenv("PORT"))
+	mainLogger.Fatal(err)
 }

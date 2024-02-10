@@ -3,14 +3,16 @@ package models
 import "time"
 
 type Auction struct {
-	ID          int       `json:"id"`
-	Name        string    `json:"name"`
-	Photo       string    `json:"photo"`
-	Description string    `json:"description"`
-	StartAt     time.Time `json:"start_at"`
-	EndAt       time.Time `json:"end_at"`
-	CreatedAt   time.Time `json:"created_at"`
-	InitialBet  int       `json:"initial_bet"`
-	Bet         int       `json:"bet"`
-	UserId      int       `json:"user_id"`
+	id          int
+	name        string
+	photo       string
+	description string
+	startAt     time.Time
+	endAt       time.Time
+	createdAt   time.Time
+	initialBet  int
+	bet         int
+	u1serId     int
 }
+
+var _ Auction

@@ -8,8 +8,7 @@ CREATE TABLE `auctions` (
   `initial_bet` INTEGER NOT NULL,
   `bet` INTEGER NOT NULL,
   `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `user_id` INTEGER NOT NULL,
-  FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+  `user_id` INTEGER NOT NULL
 );
 
 CREATE TABLE `users` (

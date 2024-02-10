@@ -35,6 +35,8 @@ func envDBConfig() Config {
 	}
 }
 
+var db *DB // Global object
+
 func New(config ...Config) *DB {
 	conn := &DB{
 		config: Config{},
@@ -42,16 +44,35 @@ func New(config ...Config) *DB {
 
 	if len(config) > 0 {
 		conn.config = config[0]
-	} else { // if no config was provided
+	} else { // if no config was provided then env confing used
 		conn.config = envDBConfig()
 	}
 
+	db = conn
 	return conn
+}
+
+func GetDB() *DB {
+	if db == nil {
+		dblogger.Panicln("db object in nil. Initilize db via database.New!")
+	}
+	return db
 }
 
 func (db *DB) Connect() error {
 	_db, err := sql.Open(db.config.Driver, db.config.Path)
 	db.db = _db
+
+	//! TEMPORARY
+	f, err := os.ReadFile("D:\\Files\\Projects\\GO\\bid2bless-auction\\db\\scripts\\init_db.sql")
+	if err != nil {
+		dblogger.Fatalln(err)
+	}
+	_, err = _db.Exec(string(f))
+	if err != nil {
+		dblogger.Fatalln(err)
+	}
+	//! END TEMPORARY
 
 	if err != nil {
 		dblogger.Println("DB connection error: ", err)

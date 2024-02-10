@@ -16,9 +16,14 @@ CREATE TABLE `users` (
   `id` INTEGER PRIMARY KEY AUTOINCREMENT,
   `email` VARCHAR(255) UNIQUE,
   `name` VARCHAR(255) NOT NULL,
-  `hashed_password` VARCHAR(255) NOT NULL,
+  `login_hash` BIGINT NOT NULL,
   `balance` INTEGER NOT NULL,
   `inuse_balance` INTEGER NOT NULL
+);
+
+CREATE TABLE `users_auctions` (
+  `user_id` INTEGER NOT NULL,
+  `auction_id` INTEGER NOT NULL
 );
 
 CREATE TABLE `bet_history` (
@@ -41,13 +46,14 @@ CREATE TABLE `messages` (
 );
 
 CREATE TABLE `categories` (
+  `id` INTEGER PRIMARY KEY AUTOINCREMENT,
   `name` VARCHAR(255) PRIMARY KEY
 );
 
 CREATE TABLE `auctions_categories` (
-  `connection_id` INTEGER PRIMARY KEY AUTOINCREMENT,
+  `id` INTEGER PRIMARY KEY AUTOINCREMENT,
   `auction_id` INTEGER NOT NULL,
   `category_id` VARCHAR(255) NOT NULL,
   FOREIGN KEY (`auction_id`) REFERENCES `auctions` (`id`),
-  FOREIGN KEY (`category_id`) REFERENCES `categories` (`name`)
+  FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`)
 );

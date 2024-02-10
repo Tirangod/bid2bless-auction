@@ -2,11 +2,10 @@ package main
 
 import (
 	"bid2bless/src/database"
-	"bid2bless/src/routes"
+	"bid2bless/src/server"
 	"log"
 	"os"
 
-	"github.com/gofiber/fiber/v2"
 	"github.com/joho/godotenv"
 )
 
@@ -14,6 +13,7 @@ var mainLogger *log.Logger = log.New(os.Stdout, "Main: ", log.LstdFlags|log.Lmsg
 
 // Swagger comments...
 func main() {
+
 	godotenv.Load() // Load vars from .env file in root folder
 
 	db := database.New()
@@ -22,9 +22,16 @@ func main() {
 	}
 	defer db.Close()
 
-	app := fiber.New(fiber.Config{
-		// Server configuration
-	})
+	server, err := server.NewServer(db)
+
+	if err != nil {
+		log.Fatal("cannot create server:", err)
+	}
+
+	err = server.Start(os.Getenv("PORT"))
+	if err != nil {
+		log.Fatal("cannot start server:", err)
+	}
 
 	// app.Use(swagger.Config{
 	// 	BasePath: "/",
@@ -33,8 +40,4 @@ func main() {
 	// 	Title:    "Bid2Bless API Docs",
 	// })
 
-	routes.SetupRoutes(app)
-
-	err := app.Listen(os.Getenv("PORT"))
-	mainLogger.Fatal(err)
 }

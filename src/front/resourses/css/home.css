@@ -2,20 +2,58 @@
 /* header section */
 
 .header {
-	margin: 0 auto;
 	background-color: #000;
-	height: 100px;
+	display: flex;
+	align-items: center;
+	gap: 20px;
 }
 
 .logo {
-
+	padding-left: 20px;
+	padding-right: 20px;
 }
 
-.logo__image {
+.image__logo {
+	height: 53.6px;
+	width: 150px;
+}
 
+.nav {
+	text-align: left;
+}
+
+.nav__list {
+	display: flex;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	gap: 20px;
 }
 
 .nav__link {
+	display: inline-block;
+	height: 100px;
+	line-height: 100px;
+	padding: 0 30px;
 	color: #fff;
 	text-decoration: none;
+}
+
+.login__form {
+	display: inline;
+	text-align: right;
+	background-color: none;
+}
+
+.login__icon {
+	height: 40px;
+	width: 40px;
+	margin: 5px;
+}
+
+.login__text {
+	margin: 4px 0 0 0;
+	color: #fff;
+	font-size: smaller;
+	text-align: center;
 }

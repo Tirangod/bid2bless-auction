@@ -4,25 +4,30 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Bid2Bless</title>
-	<link rel="icon" type="image/x-icon" href="../../assets/icons/logo-contract-black.ico"/>
-	<link rel="stylesheet" href="normalize.css">
-	<link rel="stylesheet" href="home.css">
+	<link rel="icon" type="image/x-icon" href="resourses/images/icons/logo-contract-black.ico"/>
+	<link rel="stylesheet" href="resourses/css/normalize.css"/>
+	<link rel="stylesheet" href="resourses/css/home.css"/>
 </head>
 <body>
 
 	<!-- header section -->
-	
+
 	<header class="header">
 
-		<img class="logo__image"src="../../assets/logo/w" alt="Bid2Bless Logo">
+		<a class="logo" href="home.html">
+			<img class="image__logo" src="resourses/images/logo/webp/logo-full-white.webp" alt="Bid2Bless Logo"/>
+		</a>
 
-		<nav>
-			<a class="nav__link" href="home.html">Home</a>
-			<a class="nav__link" href="about-us.html">About us</a>
+		<nav class="nav">
+			<ul class="nav__list">
+				<li class="nav__item"><a class="nav__link" href="home.html">Home</a></li>
+				<li class="nav__item"><a class="nav__link" href="about-us.html">About us</a></li>
+			</ul>
 		</nav>
 
-		<div class="login">
-
+		<div class="login__form" onclick="openForm()">
+			<img class="login__icon" src="resourses/images/logo/login.png" alt="Login Icon">
+			<p class="login__text">Login</p>
 		</div>
 		
 	</header>
@@ -38,6 +43,8 @@
 	<footer>
 
 	</footer>
+
+	<script src="resourses/js/login-form.js"></script>
 
 </body>
 </html>

@@ -2,13 +2,13 @@ package database
 
 import (
 	"database/sql"
-	"log"
 	"os"
 
+	"github.com/charmbracelet/log"
 	_ "github.com/mattn/go-sqlite3"
 )
 
-var dbLogger *log.Logger = log.New(os.Stdout, "Database: ", log.LstdFlags|log.Lmsgprefix)
+var dbLogger *log.Logger = log.New(os.Stdout)
 
 type Config struct {
 	Host     string
@@ -49,7 +49,7 @@ func New(config ...Config) *DB {
 	}
 
 	if db != nil {
-		dbLogger.Println("*DB instance already was. Created new one instead")
+		dbLogger.Info("*DB instance already was. Created new one instead")
 	}
 
 	db = conn
@@ -58,7 +58,7 @@ func New(config ...Config) *DB {
 
 func GetDB() *DB {
 	if db == nil {
-		dbLogger.Panicln("db object is nil. Initilize db via database.New()!")
+		dbLogger.Warn("db object is nil. Initilize db via database.New()!")
 	}
 	return db
 }
@@ -70,25 +70,25 @@ func (db *DB) Connect() error {
 	//! TEMPORARY
 	f, err := os.ReadFile("D:\\Files\\Projects\\GO\\bid2bless-auction\\db\\scripts\\init_db.sql")
 	if err != nil {
-		dbLogger.Fatalln(err)
+		dbLogger.Error(err)
 	}
 	_, err = _db.Exec(string(f))
 	if err != nil {
-		dbLogger.Fatalln(err)
+		dbLogger.Error(err)
 	}
 	//! END TEMPORARY
 
 	if err != nil {
-		dbLogger.Println("DB connection error: ", err)
+		dbLogger.Error("DB connection error: ", err)
 		return err
 	}
 	err = _db.Ping()
 	if err != nil {
-		dbLogger.Println("DB ping error: ", err)
+		dbLogger.Error("DB ping error: ", err)
 		return err
 	}
 
-	dbLogger.Println("Successfully connected to database!")
+	dbLogger.Info("Successfully connected to database!")
 	return nil
 }
 

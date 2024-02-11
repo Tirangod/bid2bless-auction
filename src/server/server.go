@@ -13,6 +13,7 @@ type Server struct {
 	*fiber.App
 }
 
+// Swagger comments...
 func New() *Server {
 	server := &Server{
 		fiber.New(fiber.Config{
@@ -28,8 +29,8 @@ func New() *Server {
 	return server
 }
 
-func (s *Server) Start(address string) error {
-	if err := s.Listen(address); err != nil {
+func (s *Server) Start() error {
+	if err := s.Listen(os.Getenv("PORT")); err != nil {
 		appLogger.Println("Server listen failed!")
 		return err
 	}

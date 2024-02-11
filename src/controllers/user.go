@@ -14,7 +14,7 @@ var validate *validator.Validate = validator.New(validator.WithRequiredStructEna
 
 // User registration request only created when user tries to register
 type userSignupData struct {
-	Name      string `json:"username"`
+	Name      string 
 	Email     string `json:"email"`
 	LoginHash int64  `json:"login_hash"`
 }
@@ -49,6 +49,6 @@ type userLoginData struct {
 	LoginHash int64 `json:"login_hash"`
 }
 
-func UserLogin(rawData []byte) {
-
+func UserLogin(rawData []byte) error {
+	return nil
 }

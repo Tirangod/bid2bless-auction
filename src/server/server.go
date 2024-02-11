@@ -1,35 +1,37 @@
 package server
 
 import (
-	"bid2bless/src/database"
-	"bid2bless/src/routes"
-	"github.com/gofiber/fiber/v2"
 	"log"
 	"os"
+
+	"github.com/gofiber/fiber/v2"
 )
 
+var appLogger *log.Logger = log.New(os.Stdout, "Server: ", log.LstdFlags|log.Lmsgprefix)
+
 type Server struct {
-	app        *fiber.App
-	mainLogger *log.Logger
-	db         *database.DB
+	*fiber.App
 }
 
-func NewServer(store *database.DB) (*Server, error) {
+func New() *Server {
 	server := &Server{
-		app: fiber.New(fiber.Config{
+		fiber.New(fiber.Config{
 			// Server configuration
 		}),
-		mainLogger: log.New(os.Stdout, "Main: ", log.LstdFlags|log.Lmsgprefix),
-		db:         store,
 	}
-
-	routes.SetupRoutes(server.app)
-	err := server.app.Listen(os.Getenv("PORT"))
-	server.mainLogger.Fatal(err)
-	return server, nil
+	// server.Use(swagger.Config{
+	// 	BasePath: "/",
+	// 	FilePath: "./docs/openapi.json",
+	// 	Path:     "openapi",
+	// 	Title:    "Bid2Bless API Docs",
+	// })
+	return server
 }
 
-func (server *Server) Start(address string) error {
-	return server.app.Listen(address)
-
+func (s *Server) Start(address string) error {
+	if err := s.Listen(address); err != nil {
+		appLogger.Println("Server listen failed!")
+		return err
+	}
+	return nil
 }

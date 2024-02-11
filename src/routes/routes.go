@@ -21,6 +21,7 @@ func SetupRoutes(app *fiber.App) {
 		}
 		return c.SendStatus(200)
 	})
+	
 	// Login user
 	app.Get("/user", func(c *fiber.Ctx) error {
 		return nil

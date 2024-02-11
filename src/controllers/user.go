@@ -10,7 +10,7 @@ import (
 )
 
 var logger *log.Logger = log.New(os.Stdout)
-var validate *validator.Validate = validator.New(validator.WithRequiredStructEnabled())
+var validate *validator.Validate = validator.New()
 
 // User registration request only created when user tries to register
 func UserSignup(rawData []byte) error {
@@ -27,6 +27,7 @@ func UserSignup(rawData []byte) error {
 	}
 
 	err = userModel.Create()
+
 	if err != nil {
 		logger.Error("Unable to create user!")
 		return err

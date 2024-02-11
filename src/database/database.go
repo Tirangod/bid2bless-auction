@@ -4,7 +4,6 @@ import (
 	"database/sql"
 	"os"
 
-	"github.com/charmbracelet/log"
 	_ "github.com/mattn/go-sqlite3"
 )
 
@@ -81,9 +80,8 @@ func (db *DB) Connect() error {
 	return nil
 }
 
-func (db *DB) RawQuery(query string) error {
-	
-	_, err := db.db.Query("")
+func (db *DB) RawQuery(query string, args ...{}interface) error {
+	_, err := db.db.Query(query, args...)
 	return err
 }
 

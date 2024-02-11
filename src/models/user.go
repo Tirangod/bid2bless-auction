@@ -1,12 +1,11 @@
 package models
 
 type User struct {
-	id             int
-	email          string
-	name           string
-	hashedPassword string
-	balance        int
-	inuseBalance   int
+	Email          string `validate:"email"`
+	Name           string `validate:"required"`
+	HashedPassword int64  `validate:"required"`
+	Balance        int    `validate:"gte:0"`
+	InuseBalance   int    `validate:"gte:0"`
 }
 
 var _ User

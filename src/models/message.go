@@ -3,10 +3,10 @@ package models
 import "time"
 
 type Message struct {
-	id        int
-	auctionId int
-	sentAt    time.Time
-	userId    int
+	ID        int       `json:"id"`
+	AuctionId int       `json:"auction_id"`
+	SentAt    time.Time `json:"sent_at"`
+	UserId    int       `json:"user_id"`
 }
 
 var _ Message

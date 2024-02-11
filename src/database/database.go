@@ -2,6 +2,7 @@ package database
 
 import (
 	"database/sql"
+	"fmt"
 	"os"
 
 	"github.com/charmbracelet/log"
@@ -82,16 +83,30 @@ func (db *DB) Connect() error {
 }
 
 func (db *DB) RawQuery(query string, args ...interface{}) (*sql.Rows, error) {
-
 	rows, err := db.db.Query(query, args...)
-
 	return rows, err
-
 }
 
 func (db *DB) Exec(query string, args ...interface{}) error {
 	_, err := db.db.Exec(query, args)
 	return err
+}
+
+func (db *DB) Select(prop string, table string) *sql.Row {
+	return db.db.QueryRow(fmt.Sprintf("select %s from %s;", prop, table))
+}
+
+func (db *DB) SelectAll(table string) *sql.Row {
+	return db.Select("*", table)
+}
+
+func (db *DB) SelectWhere(prop string, table string, cond string) *sql.Row {
+	return db.db.QueryRow(fmt.Sprintf("select %s from %s where %s;", prop, table, cond))
+}
+
+func (db *DB) CountWhere(table string, cond string) (int, error) {
+	// TODO
+	return 0, nil
 }
 
 func (db *DB) Close() {

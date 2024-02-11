@@ -3,6 +3,7 @@ package models
 import (
 	"bid2bless/src/database"
 	"errors"
+	"strconv"
 	"strings"
 )
 
@@ -61,7 +62,11 @@ func (u *User) Create() error {
 }
 
 func (u *User) Exists() bool {
-	return false
+	n, err := db.CountWhere("users", "users.login_hash == "+strconv.FormatInt(u.LoginHash, 10))
+	if err != nil {
+		return false
+	}
+	return n > 0
 }
 
 func GetUserByID(id int64) User {

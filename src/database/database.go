@@ -81,11 +81,11 @@ func (db *DB) Connect() error {
 	return nil
 }
 
-func (db *DB) RawQuery(query string, args ...interface{}) error {
+func (db *DB) RawQuery(query string, args ...interface{}) (*sql.Rows, error) {
 
-	_, err := db.db.Query(query, args...)
+	rows, err := db.db.Query(query, args...)
 
-	return err
+	return rows, err
 }
 
 func (db *DB) Close() {

@@ -14,16 +14,7 @@ type User struct {
 	InuseBalance int    `json:"inuse_balance"`
 }
 
-func (u *User) Create() error {
-	// db query
-	return nil
-}
-
-func (u *User) Exists() bool {
-	return false
-}
-
-func (u *User) Validate() error {
+func (u *User) validate() error {
 	var errs []error
 	if u.ID < 0 {
 		errs = append(errs, errors.New("invalid ID in user model"))
@@ -48,6 +39,15 @@ func (u *User) Validate() error {
 		return errors.Join(errs...)
 	}
 	return nil
+}
+
+func (u *User) Create() error {
+
+	return u.validate()
+}
+
+func (u *User) Exists() bool {
+	return false
 }
 
 func GetUserByID(id int64) User {

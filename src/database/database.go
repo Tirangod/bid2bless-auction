@@ -81,9 +81,12 @@ func (db *DB) Connect() error {
 	return nil
 }
 
-func (db *DB) RawQuery(query string, args ...interface{}) error {
-	_, err := db.db.Query(query, args...)
-	return err
+func (db *DB) RawQuery(query string, args ...interface{}) (*sql.Rows, error) {
+
+	rows, err := db.db.Query(query, args...)
+
+	return rows, err
+
 }
 
 func (db *DB) Close() {

@@ -82,6 +82,7 @@ func (db *DB) Connect() error {
 }
 
 func (db *DB) RawQuery(query string) error {
+	
 	_, err := db.db.Query("")
 	return err
 }

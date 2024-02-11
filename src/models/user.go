@@ -1,9 +1,12 @@
 package models
 
 import (
+	"bid2bless/src/database"
 	"errors"
 	"strings"
 )
+
+var db *database.DB = database.GetDB()
 
 type User struct {
 	ID           int    `json:"id"`
@@ -42,8 +45,19 @@ func (u *User) validate() error {
 }
 
 func (u *User) Create() error {
+	err := u.validate()
 
-	return u.validate()
+	if err != nil {
+		return err
+	}
+
+	query := `
+		insert into 
+			users (email, name, login_hash, balance, inuse_balance)
+		values ()
+	`
+
+	return nil
 }
 
 func (u *User) Exists() bool {

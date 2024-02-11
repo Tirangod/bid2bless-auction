@@ -3,6 +3,7 @@ package controllers
 import (
 	"bid2bless/src/models"
 	"encoding/json"
+	"errors"
 	"os"
 
 	"github.com/charmbracelet/log"
@@ -31,6 +32,9 @@ func UserLogin(rawData []byte) error {
 	err := json.Unmarshal(rawData, &userModel)
 	if err != nil {
 		return err
+	}
+	if !userModel.Exists() {
+		return errors.New("user hasnt found")
 	}
 	return nil
 }

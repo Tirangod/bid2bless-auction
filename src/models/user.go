@@ -11,11 +11,8 @@ type User struct {
 	InuseBalance int    `validate:"gte:0"`
 }
 
-<<<<<<< HEAD
 var validate *validator.Validate = validator.New(validator.WithRequiredStructEnabled())
 
-=======
->>>>>>> 4c848bcf28dae2fe33355c44852d0d3d9b50d0bb
 func (u *User) CreateUser() error {
 	// db query
 	return nil

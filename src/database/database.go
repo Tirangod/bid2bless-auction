@@ -67,17 +67,6 @@ func (db *DB) Connect() error {
 	_db, err := sql.Open(db.config.Driver, db.config.Path)
 	db.db = _db
 
-	//! TEMPORARY
-	f, err := os.ReadFile("D:\\Files\\Projects\\GO\\bid2bless-auction\\db\\scripts\\init_db.sql")
-	if err != nil {
-		dbLogger.Error(err)
-	}
-	_, err = _db.Exec(string(f))
-	if err != nil {
-		dbLogger.Error(err)
-	}
-	//! END TEMPORARY
-
 	if err != nil {
 		dbLogger.Error("DB connection error: ", err)
 		return err

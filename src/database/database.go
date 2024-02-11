@@ -86,6 +86,7 @@ func (db *DB) RawQuery(query string, args ...interface{}) error {
 	return err
 }
 
+
 func (db *DB) Close() {
 	db.db.Close()
 }

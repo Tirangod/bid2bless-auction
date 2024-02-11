@@ -54,9 +54,9 @@ func (u *User) Create() error {
 	query := `
 		insert into 
 			users (email, name, login_hash, balance, inuse_balance)
-		values ()
+		values ($1, $2, $3, $4, $5);
 	`
-
+	db.RawQuery(query, u.Email, u.Name, u.LoginHash, u.Balance, u.InuseBalance)
 	return nil
 }
 

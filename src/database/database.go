@@ -89,6 +89,10 @@ func (db *DB) RawQuery(query string, args ...interface{}) (*sql.Rows, error) {
 
 }
 
+func (db *DB) Exec(query string, args ...interface{}) error {
+	_, err := db.db.Exec(query, args)
+	return err
+}
 
 func (db *DB) Close() {
 	db.db.Close()

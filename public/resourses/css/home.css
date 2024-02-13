@@ -80,3 +80,16 @@
 }
 
 /* footer section */
+
+.footer {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: #000;
+	height: 100px;
+	}
+
+.copyright {
+	color: #fff;
+	font-size: small;
+}

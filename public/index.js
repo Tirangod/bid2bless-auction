@@ -1,6 +1,6 @@
 console.log("index.js: started!")
 
-import Alpine from './js/alpinejs/alpinejs.js'
+import Alpine from 'resourses/js/alpinejs/alpinejs.js'
 
 async function loadHTMLComponent(name) {
     // TODO: handle errors
@@ -18,5 +18,5 @@ Alpine.directive("comp", async (el, { expression }, { evaluate }) => {
 })
 
 window.Alpine = Alpine
- 
+
 Alpine.start()
